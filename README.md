@@ -18,7 +18,10 @@ plotting_frame, cluster_groups, centroids = get_plotting_frame(df, featcols, clu
 subspace = get_subspace(centroids, cluster_groups)
 subspace = bin_subspace(subspace, cluster_groups, spread_factor = 1)
 
-plotting_frame = grow_entourages(plotting_frame, subspace) # adds columns ['x','y']
+pts = grow_entourages(plotting_frame, subspace)
+
+plotting_frame['x'] = [item[0] for item in pts]
+plotting_frame['y'] = [item[1] for item in pts]
 
 # ivpy plot
 
