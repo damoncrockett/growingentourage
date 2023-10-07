@@ -1,5 +1,5 @@
 # Growing Entourage Plot
-A technique for zero occlusion unit visualization of clusters of points (usually images or glyphs). Journal article [here](https://dahj.org/article/direct-visualization-techniques).
+A technique for zero occlusion unit visualization of clusters of points (usually images or glyphs). Journal article [here]([https://dahj.org/article/direct-visualization-techniques](https://journals.ub.uni-heidelberg.de/index.php/dah/article/view/33529)).
 
 # Usage
 
