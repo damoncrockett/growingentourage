@@ -108,7 +108,4 @@ def grow_entourages(plotting_frame: pd.DataFrame, subspace: pd.DataFrame) -> pd.
                 occupied_positions.add(candidate_point)
                 break
 
-    plotting_frame['x'] = [item[0] for item in pts]
-    plotting_frame['y'] = [item[1] for item in pts]
-
-    return plotting_frame
+    return pts
