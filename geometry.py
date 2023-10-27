@@ -23,7 +23,7 @@ def get_plotting_frame(df: pd.DataFrame, featcols: list, clustercol: str) -> tup
     plotting_frame['d'] = pd.concat(dist_series)
 
     plotting_frame = plotting_frame.sort_values(['cluster','d'])
-    plotting_frame['intra_group_order'] = cluster_groups.cumcount()
+    plotting_frame['intra_group_order'] = plotting_frame.groupby('cluster').cumcount() # can't use previous groupby bc order has changed
     plotting_frame = plotting_frame.sort_values(by=['intra_group_order', 'cluster'])
 
     return plotting_frame, cluster_groups, centroids
