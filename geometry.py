@@ -3,6 +3,7 @@ from pandas.core.groupby.generic import DataFrameGroupBy
 from math import sqrt, ceil, pi
 from numpy.linalg import norm
 from sklearn.manifold import TSNE
+from sklearn.decomposition import PCA
 
 def featscale(ser: pd.Series) -> pd.Series:
     return (ser - ser.min()) / (ser.max() - ser.min())
@@ -28,14 +29,18 @@ def get_plotting_frame(df: pd.DataFrame, featcols: list, clustercol: str) -> tup
 
     return plotting_frame, cluster_groups, centroids
 
-def get_subspace(centroids: list, cluster_groups: DataFrameGroupBy, **kwargs) -> pd.DataFrame:
+def get_subspace(centroids: list, cluster_groups: DataFrameGroupBy, method='tsne', **kwargs) -> pd.DataFrame:
     perplexity = kwargs.get('perplexity', 20)
     early_exaggeration = kwargs.get('early_exaggeration', 15)
     learning_rate = kwargs.get('learning_rate', 400)
 
-    xy = TSNE(perplexity=perplexity,
-              early_exaggeration=early_exaggeration,
-              learning_rate=learning_rate).fit_transform(centroids)
+    if method == 'tsne':
+        xy = TSNE(perplexity=perplexity,
+                  early_exaggeration=early_exaggeration,
+                  learning_rate=learning_rate).fit_transform(centroids)
+        
+    elif method == 'pca':
+        xy = PCA(n_components=2).fit_transform(centroids)
     
     subspace = pd.DataFrame(xy)
     subspace.columns = ['x','y']
