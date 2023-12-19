@@ -33,11 +33,13 @@ def get_subspace(centroids: list, cluster_groups: DataFrameGroupBy, method='tsne
     perplexity = kwargs.get('perplexity', 20)
     early_exaggeration = kwargs.get('early_exaggeration', 15)
     learning_rate = kwargs.get('learning_rate', 400)
+    init = kwargs.get('init', 'pca')
 
     if method == 'tsne':
         xy = TSNE(perplexity=perplexity,
                   early_exaggeration=early_exaggeration,
-                  learning_rate=learning_rate).fit_transform(centroids)
+                  learning_rate=learning_rate,
+                  init=init).fit_transform(centroids)
         
     elif method == 'pca':
         xy = PCA(n_components=2).fit_transform(centroids)
